@@ -112,33 +112,32 @@
 
     <tr>
 
-      <td rowspan="">
+      <td rowspan="1">
         <p>Consignee</p>
       </td>
 
-      <td colspan="1" rowspan="1">
+      <td colspan="1">
         <h6>Seller Name</h6>
-        <b>MS urvisha patel</b>
+        <b>{{products.sender.name}}</b>
         <br />
-        <b>(+91) 9978619456</b>
+        <b>{{products.sender.mobile}}</b>
       </td>
 
-      <td colspan="4" rowspan="1">
+      <td colspan="4">
         <h6>Buyer's Name</h6>
-        <b>Mr Anis H. Sikander</b>
+        <b>{{products.client.name}}</b>
         <br />
-        <b>(+91) 9869384298</b>
+        <b>{{products.client.mobile}}</b>
       </td>
 
     </tr>
     <tr>
       <td rowspan="2">
-        <P>M/S. MA ENTERPRISE</P>
-        <p>Address: Rekab tower c wing 1st floor flat no 114 E S Patanwala ( gurepdev)</p>
-        <p>mumbai.400033 (m.s.)</p>
-        <p>GST IN: 27AGFPS5954C1Z7</p>
-        <p>Email: ma.enterprise52@yahoo.com | anishaksikander@gmail.com</p>
-        <p>Contact : +91 9869384298</p>
+        <P>{{products.client.company}}</P>
+        <p style="width:400px;">Address: {{products.client.address}}</p>
+        <p>GST IN: {{products.client.gst}}</p>
+        <p>Email: {{products.client.email}}</p>
+        <p>Contact : {{products.client.mobile}}</p>
       </td>
 
       <td colspan="1">
@@ -176,7 +175,7 @@
       <td>Unit</td>
       <td>Amount</td>
     </tr>
-    <tr style="font-weight: 700;">
+    <!-- <tr style="font-weight: 700;">
       <td width="30px">1</td>
       <td width="548px">
         <p class="red"> Silica Fabric DSZHS96.0.8 </p>
@@ -194,48 +193,22 @@
       <td>₹900.00</td>
       <td>SQM</td>
       <td>₹1,35,000.00</td>
-    </tr>
-    <tr style="font-weight: 700;">
-      <td>2</td>
-      <td>
-        <p class="red">Approved Standard:</p>
-        IS 11871<br>
-        Test Certificate will be Provided along with the Material Supply<br>
-
-        &nbsp;<br>
-        &nbsp;<br>
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <!-- <tr>
-      <td></td>
-      <td>&nbsp; <br>
-        &nbsp;<br>
-        &nbsp;<br>
-        &nbsp;<br>
-        &nbsp;<br>
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
     </tr> -->
-    <tr>
-      <td></td>
-      <td>&nbsp; <br>
-        &nbsp;<br>
-        &nbsp;<br>
-        &nbsp;<br>
-        &nbsp;<br>
+
+    {{#each products.prodlist}}
+    <tr style="font-weight: 700;">
+      <td width="30px">{{this.id}}</td>
+      <td width="552px">
+        <p class="red" style="padding-bottom: 0px;">{{this.description}}</p>
+        <p style="white-space: pre-line; padding: 0px">{{this.data}}</p>
       </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{{this.quantity}}</td>
+      <td>{{this.rate}}</td>
+      <td>{{this.unit}}</td>
+      <td>{{this.subtotal}}</td>
     </tr>
+    {{/each}}
+
 
     <tr style="color: red; font-weight: 800;">
       <td colspan="2">
@@ -255,8 +228,7 @@
         18.00 %</td>
       <td></td>
       <td align="center">TO PAY <br>
-        ₹ - <br>
-        ₹ 24,300.00</td>
+        {{products.tax}}</td>
     </tr>
 
     <tr style="font-weight: 800;">
@@ -269,7 +241,7 @@
       <td align="center">150 </td>
       <td></td>
       <td align="center">SQM</td>
-      <td align="center">₹ 1,59,300.00</td>
+      <td align="center">{{products.gtotal}}</td>
     </tr>
 
     <tr>
@@ -278,7 +250,7 @@
           &nbsp;Amount Chargable( In Word)
         </p>
         <p>
-          &nbsp;Indian Rupees One Lakh FiftyNine Thousand Three Hundred Only For,<span style="float:right">Darshan
+          &nbsp;{{products.gtotalInword}} Only For,<span style="float:right">Darshan
             Safety Zone&nbsp;&nbsp;&nbsp;</span>
 
         </p>
@@ -323,22 +295,19 @@
         <div style="display:-webkit-flex; width: 60%; margin: 5px auto; padding: 7px 0px;">
 
           <span style="margin: 0px 20px;">
-            <p>Prepared By</p>
-            <br />
+            <p style="padding-bottom: 5px;">Prepared By</p>
             <p style="font-weight:500">Ms Urvisha Patel</p>
             <p style="font-weight:500">For Darshan Safety Zone</p>
           </span>
 
           <span style="margin: 0px 20px;">
-            <p>Approved By:</p>
-            <br />
+            <p style="padding-bottom: 5px;">Approved By:</p>
             <p style="font-weight:500">Mr Darshan Pandya</p>
             <p style="font-weight:500">For Darshan Safety Zone</p>
           </span>
 
           <span style="margin: 0px 20px;">
-            <p>Approved By:</p>
-            <br />
+            <p style="padding-bottom: 5px;">Approved By:</p>
             <p style="font-weight:500">Mr Monil Sanghrajka</p>
             <p style="font-weight:500">For AGG Lifesciences and Safety Solutions LLP.</p>
           </span>

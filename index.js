@@ -3,9 +3,18 @@ const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const homeRoutes = require('./routes/home-routes');
 const bodyParser = require('body-parser');
+const cors = require("cors");
+
+const corsOptions = {
+    origin: '*',
+    credentials: true,            //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+}
+
 
 const app = express();
 
+app.use(cors(corsOptions))
 
 app.use(expressLayouts);
 app.set('view engine', 'ejs');

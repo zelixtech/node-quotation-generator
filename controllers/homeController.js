@@ -25,6 +25,8 @@ const generatePdf = async (req, res, next) => {
     count++;
 
     let array = [];
+    let rarray = [];
+    let TACList = [];
 
     // console.log(data[0].products);
 
@@ -33,9 +35,10 @@ const generatePdf = async (req, res, next) => {
     data[0].products.forEach((d, i) => {
         const prod = {
             id: i + 1,
-            description: d.description,
-            data: d.data,
+            description: d.name,
+            data: d.data[0],
             quantity: d.quantity,
+            thikness: d.thikness,
             rate: d.rate.toLocaleString('en-IN', {
                 style: 'currency',
                 currency: 'INR'
@@ -49,6 +52,42 @@ const generatePdf = async (req, res, next) => {
         }
         array.push(prod);
     });
+
+
+
+    data[0].rproducts.forEach((d, i) => {
+        const rprod = {
+            id: i + 1,
+            description: d.name,
+            data: d.data[0],
+            quantity: d.quantity,
+            thikness: d.thikness,
+            rate: d.rate.toLocaleString('en-IN', {
+                style: 'currency',
+                currency: 'INR'
+            }),
+            unit: d.unit,
+            total: d.quantity * d.rate,
+            subtotal: (d.quantity * d.rate).toLocaleString('en-IN', {
+                style: 'currency',
+                currency: 'INR'
+            })
+        }
+        rarray.push(rprod);
+    });
+
+
+    const TACarray = details.TAC.split(/\r?\n/);
+
+    TACarray.forEach((d) => {
+
+        const tacdata = {
+            data: d
+        }
+
+        TACList.push(tacdata);
+
+    })
 
     let subtotal = 0;
     array.forEach(i => {
@@ -74,12 +113,16 @@ const generatePdf = async (req, res, next) => {
 
     const obj = {
         prodlist: array,
+        rprodlist: rarray,
         subtotal: subtotal,
         tax: tax,
         gtotal: grandtotal,
         gtotalInword: inword,
         sender: details.sender,
-        client: details.client
+        client: details.client,
+        IsRP: details.isRP,
+        IsTAC: details.isTAC,
+        TAC: TACList,
 
     }
 

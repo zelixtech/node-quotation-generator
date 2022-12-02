@@ -199,8 +199,14 @@
     <tr style="font-weight: 700;">
       <td width="30px">{{this.id}}</td>
       <td width="552px">
-        <p class="red" style="padding-bottom: 0px;">{{this.description}}</p>
-        <p style="white-space: pre-line; padding: 0px">{{this.data}}</p>
+        <p class="red" style="padding-bottom: 1px;">{{this.description}}</p>
+
+        <p>Model No: {{this.data.ModelNo}}</p>
+        <p>Working Temp: {{this.data.WorkingTempRange}}</p>
+        <p>Melting Point: {{this.data.MeltingPoint}}</p>
+        <p>Thikness: {{this.thikness}}</p>
+        <p>Color: {{this.data.Color}}</p>
+
       </td>
       <td>{{this.quantity}}</td>
       <td>{{this.rate}}</td>
@@ -208,6 +214,40 @@
       <td>{{this.subtotal}}</td>
     </tr>
     {{/each}}
+
+    {{#ifCond products.IsRP '!==' 0 }}
+
+    <tr>
+      <td colspan="6">
+        <p align="center" style="padding: 2px 0px; color: red;">
+          OR
+        </p>
+      </td>
+    </tr>
+
+    {{#each products.rprodlist}}
+    <tr style="font-weight: 700;">
+      <td width="30px">{{this.id}}</td>
+      <td width="552px">
+        <p class="red" style="padding-bottom: 1px;">{{this.description}}</p>
+
+        <p>Model No: {{this.data.ModelNo}}</p>
+        <p>Working Temp: {{this.data.WorkingTempRange}}</p>
+        <p>Melting Point: {{this.data.MeltingPoint}}</p>
+        <p>Thikness: {{this.thikness}}</p>
+        <p>Color: {{this.data.Color}}</p>
+
+      </td>
+      <td>{{this.quantity}}</td>
+      <td>{{this.rate}}</td>
+      <td>{{this.unit}}</td>
+      <td>{{this.subtotal}}</td>
+    </tr>
+    {{/each}}
+
+    {{/ifCond}}
+
+
 
 
     <tr style="color: red; font-weight: 800;">
@@ -267,27 +307,25 @@
       </td>
     </tr>
 
+
+    {{#ifCond products.IsTAC '!==' 0 }}
+
     <tr>
       <td colspan="6">
         <p>
           Additional Terms & Conditions
         </p>
-
+        <!-- <p style="white-space: pre-line; padding: 0px">{{products.TAC}}</p> -->
+        </p>
         <ol style="margin-left:25px; font-weight:500">
-          <li>Delivery Location: Transporter's Warehouse Booking, Moti Khavdi, Jamnagar</li>
-          <li>Transportation Cost in your Scope</li>
-          <li>Payment Schedule: 18% Advanced with Release of PI</li>
-          <li>Delivery Schedule will be weekly at Saturday; Whatever Quantity is ready will be dispatched</li>
-          <li>15 Days PDC will be Required As per every lot.</li>
-          <li>5 Blank Cheque will be Required (Unused cheque will be Return)</li>
-          <li>Required Submission of Soft Copy of the PDC on Saturday</li>
-          <li>The whole Delivery of Quantity 18400 Nos will be Completed within 45 Working Days</li>
-
+          {{#each products.TAC}}
+          <li>{{this.data}}</li>
+          {{/each}}
         </ol>
-
-
       </td>
     </tr>
+
+    {{/ifCond}}
 
     <tr>
       <td colspan="6">

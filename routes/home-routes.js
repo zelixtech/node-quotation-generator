@@ -4,7 +4,7 @@ const { homeview, generatePdf } = require('../controllers/homeController');
 const router = express.Router();
 
 router.get('/', homeview);
-router.get('/download', generatePdf);
+// router.get('/download', generatePdf);
 router.post('/download', generatePdf);
 
 module.exports = {
