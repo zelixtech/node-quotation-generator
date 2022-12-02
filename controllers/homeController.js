@@ -16,7 +16,7 @@ const generatePdf = async (req, res, next) => {
 
     const data = req.body
 
-    console.log(req.body)
+    // console.log(req.body)
 
     const html = fs.readFileSync(path.join(__dirname, '../views/template.html'), 'utf-8');
 
@@ -154,14 +154,18 @@ const generatePdf = async (req, res, next) => {
 
 
 
-    var options = {
-        root: "D:\\zelixprojects\\node-quotation-generator\\docs"
-    };
+    // var options = {
+    //     root: "D:\\zelixprojects\\node-quotation-generator\\docs"
+    // };
 
 
-    var qoutation = fs.readFileSync('D:\\zelixprojects\\node-quotation-generator\\docs\\' + filename);
-    res.contentType("application/pdf");
-    res.send(qoutation);
+    // var qoutation = fs.readFileSync('D:\\zelixprojects\\node-quotation-generator\\docs\\' + filename);
+    // res.contentType("application/pdf");
+    // res.send(qoutation);
+
+
+    // res.sendFile(path.join(__dirname, '../docs/' + filename));
+    res.send(filepath)
 }
 
 
