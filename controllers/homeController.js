@@ -18,7 +18,7 @@ const generatePdf = async (req, res, next) => {
 
     // console.log(req.body)
 
-    const html = fs.readFileSync(path.join(__dirname, '../views/template.html'), 'utf-8');
+    const html = fs.readFileSync(path.join(__dirname, '../views/Qoutation_template.html'), 'utf-8');
 
     const filename = "DSZ" + count + '.pdf';
 
