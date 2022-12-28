@@ -32,7 +32,7 @@
         }
 
         .red {
-            color: red;
+            color: #c00000;
         }
 
         td {
@@ -72,16 +72,17 @@
     <div style="margin: 0px; padding: 0px; display:-webkit-flex;">
 
         <table border="1"
-            style="border-left: solid black 2px; border-bottom: 1.3px solid black; width: 55%; border-right: 1px solid black; margin: 0px; padding:0px;">
-            <tr height="135px">
+            style="border-left: solid black 2px; border-bottom: 1.3px solid black; border-right: none; width: 55%; margin: 0px; padding:0px;">
+            <tr height="146px">
                 <td>
                     <p>Darshan Safety Zone</p>
                     <p>5,DHARMKUJ,NR.MUKTIDHAM ESTATE,B/H.PANCHAM MALL,NIKOL GAM</p>
                     <p>ROAD,AHMEDABAD-382 350</p>
                     <p>MO: +91 9429128748 & 9712579456 & 9978619456</p>
-                    <p>Website : www.fireblanket.in</p>
+                    <p>Website : www.darshansafetyzone.in</p>
                     <p>GSTIN/UIN : 24AKQPP5799M1Z0</p>
                     <p>Email: urvisha@darshansafetyzone.in</p>
+                    <p>IEC No: 0816910553</p>
                 </td>
             </tr>
             <tr height="26px">
@@ -103,39 +104,40 @@
 
         <table border="1"
             style="border-right: solid black 2px; border-bottom: 1.3px solid black; width: 45%; border-left: 1.2px solid black; margin: 0px; padding: 0px;">
-            <tr height="45px">
-                <td width="52.1%">
-                    <h6>Quotation No</h6>
-                    <b>DSZ0822U/2021-22</b>
+            <tr height="48px">
+                <td width="50%">
+                    <h6 style="padding-top:4px">Quotation No</h6>
+                    <b style="padding-top:6px">DSZ0822U/2021-22</b>
                 </td>
 
                 <td>
-                    <h6>Dated</h6>
-                    <b>01-11-22</b>
-                </td>
-            </tr>
-
-            <tr height="45px">
-                <td>
-                    <h6>Buyers's Requirement No</h6>
-                    <b style="color: red;">By Mail</b>
-                </td>
-
-                <td>
-                    <h6>Offer Validity</h6>
-                    <p>30 Working Days</p>
+                    <h6 style="padding-top:4px">Dated</h6>
+                    <b style="padding-top:6px">{{products.date}}</b>
                 </td>
             </tr>
 
-            <tr height="45px">
+            <tr height="48px">
                 <td>
-                    <h6>Suppliers's Ref. No.</h6>
-                    <b>2022-2023</b>
+                    <h6 style="padding-top:4px">Buyers's Requirement No</h6>
+                    <b style="padding-top:6px;">By Mail</b>
                 </td>
 
                 <td>
-                    <h6>Payment Terms</h6>
-                    <b style="color: red;">100% Advanced</b>
+                    <h6 style="padding-top:4px">Offer Validity</h6>
+                    <b style="color: #c00000; font-weight: 600;padding-top:6px">{{products.metadata.offer_validity}}</b>
+                </td>
+            </tr>
+
+            <tr height="50px">
+                <td>
+                    <h6 style="padding-top:4px">Suppliers's Ref. No.</h6>
+                    <b style="padding-top:6px">{{products.supRefNo}}</b>
+                </td>
+
+                <td>
+                    <h6 style="padding-top:4px">Payment Terms</h6>
+                    <b
+                        style="color: #c00000; font-weight: 600; padding-top: 6px;">{{products.metadata.payment_terms}}</b>
                 </td>
 
             </tr>
@@ -158,23 +160,23 @@
             <tr height="45px">
                 <td>
                     <h6>Dispatch Through</h6>
-                    <b>As Per your Suggestion</b>
+                    <b>{{products.metadata.dispatch_through}}</b>
                 </td>
 
                 <td>
                     <h6>Destination</h6>
-                    <b>As Per your Suggestion</b>
+                    <b>{{products.metadata.destination}}</b>
                 </td>
             </tr>
             <tr height="45px">
                 <td>
                     <h6>Terms of Delivery</h6>
-                    <b>Available in Ready Stock</b>
+                    <b>{{products.metadata.terms_of_deliver}}</b>
                 </td>
 
                 <td>
                     <h6>Total Bundle</h6>
-                    <b>As Per Actual</b>
+                    <b>{{products.metadata.total_bundel}}</b>
                 </td>
             </tr>
         </table>
@@ -185,13 +187,14 @@
     border-left: solid black 2px;
     border-right: solid black 2px;
     ">
-        <tr style="font-weight:800;">
-            <td style="border-bottom: solid black 2px; ">Sr No.</td>
-            <td style="border-bottom: solid black 2px; ">Description Of Goods</td>
-            <td style="border-bottom: solid black 2px; ">Quantity</td>
-            <td style="border-bottom: solid black 2px; ">Rate</td>
-            <td style="border-bottom: solid black 2px; ">Unit</td>
-            <td style="border-bottom: solid black 2px; ">Amount</td>
+        <tr>
+            <td width="5%" style="border-bottom: solid black 2px; text-align: center;  font-weight:800;">Sr No.</td>
+            <td width="40%" style="border-bottom: solid black 2px; font-weight:800;">Description Of Goods</td>
+            <td width="9.8%" style="border-bottom: solid black 2px; text-align: center; font-weight:800;">HSN</td>
+            <td width="11.25%" style="border-bottom: solid black 2px; text-align: center; font-weight:800;">Qty</td>
+            <td width="11.25%" style="border-bottom: solid black 2px; text-align: center; font-weight:800;">Rate</td>
+            <td width="9.5%" style="border-bottom: solid black 2px; text-align: center; font-weight:800;">Unit</td>
+            <td width="13%" style="border-bottom: solid black 2px; text-align: center; font-weight:800;">Amount</td>
         </tr>
         <!-- <tr style="font-weight: 700;">
       <td width="30px">1</td>
@@ -212,37 +215,45 @@
       <td>SQM</td>
       <td>₹1,35,000.00</td>
     </tr> -->
-        <!-- {{#each products.prodlist}} -->
+        {{#each products.prodlist}}
         <tr style="font-weight: 700;">
-            <td width="5%">{{this.id}}</td>
-            <td width="50%">
-                <p class="red" style="padding-bottom: 1px;">{{this.description}}</p>
+            <td style="text-align: center;">{{this.id}}</td>
+            <td>
+                <p class="red" style="padding-bottom: 1px;">{{this.description}} {{this.modelNo}}</p>
 
-                <p>Model No: {{this.data.ModelNo}}</p>
-                <p>Working Temp: {{this.data.WorkingTempRange}}</p>
-                <p>Melting Point: {{this.data.MeltingPoint}}</p>
-                <p>Thikness: {{this.thikness}}</p>
-                <p>Color: {{this.data.Color}}</p>
+                {{#ifCond this.size '!==' '' }}
+                <p style="font-weight:500;">size: {{this.size}}</p>
+                {{/ifCond}}
+
+                {{#each this.data}}
+                <p style="font-weight:500;">{{this}}</p>
+                {{/each}}
+
+                {{#each this.note}}
+                <p style="font-weight:500;">{{this}}</p>
+                {{/each}}
+
 
             </td>
-            <td style="text-align: center;">{{this.quantity}}</td>
-            <td style="text-align: center;">{{this.rate}}</td>
-            <td style="text-align: center;">{{this.unit}}</td>
-            <td style="text-align: center;">{{this.subtotal}}</td>
+            <td style="text-align: center; font-weight:500;">{{this.HSNCode}}</td>
+            <td style="text-align: center; font-weight:500;">{{this.quantity}}</td>
+            <td style="text-align: center; font-weight:500;">{{this.rate}}</td>
+            <td style="text-align: center; font-weight:500;">{{this.unit}}</td>
+            <td style="text-align: center; font-weight:500;">{{this.subtotal}}</td>
         </tr>
-        <!-- {{/each}} -->
+        {{/each}}
 
-        <!-- {{#ifCond products.IsRP '!==' 0 }} -->
+        {{#ifCond products.IsRP '!==' 0 }}
 
         <tr>
-            <td colspan="6">
-                <p align="center" style="padding: 2px 0px; color: red;">
+            <td colspan="7">
+                <p align="center" style="padding: 2px 0px; color: #c00000;">
                     OR
                 </p>
             </td>
         </tr>
 
-        <!-- {{#each products.rprodlist}} -->
+        {{#each products.rprodlist}}
         <tr style="font-weight: 700;">
             <td width="30px">{{this.id}}</td>
             <td width="552px">
@@ -260,35 +271,35 @@
             <td style="text-align: center;">{{this.unit}}</td>
             <td style="text-align: center;">{{this.subtotal}}</td>
         </tr>
-        <!-- {{/each}} -->
+        {{/each}}
 
-        <!-- {{/ifCond}} -->
+        {{/ifCond}}
 
-
-
-
-        <tr style="color: red; font-weight: 800;">
+        <tr style="color: #c00000; font-weight: 800;">
             <td colspan="2">
                 <p align="right">
-                    Transportation is To PAY Basis&nbsp; <br>
+                    Transportation Cost&nbsp; <br>
                     Packaging And Forwarding Charges&nbsp; <br>
-                    Output IGST 18%&nbsp; <br>
+                    Output IGST {{products.metadata.GST}}%&nbsp; <br>
                 </p>
                 <p align="left">
-                    &nbsp; Transportation : Booking For Transporter's Warehouse; TO PAY <br>
+                    &nbsp; Transportation : {{products.metadata.transportation}}<br>
                     &nbsp; Brand: Signatuer By DSZ <br>
-                    &nbsp; HSN Code 7019<br>
                 </p>
             </td>
-            <td></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
             <td style="text-align: center; vertical-align: top;">
                 <br>
                 <br>
-                18.00 %
+                {{products.metadata.GST}}%
             </td>
-            <td></td>
-            <td style="text-align: center; vertical-align: top;">TO PAY <br><br>
-                {{products.tax}}</td>
+            <td colspan="1"></td>
+            <td style="text-align: center; vertical-align: top;">
+                {{products.transportation_cost}}<br />
+                {{products.packaging_and_forwarding_charges}}<br />
+                {{products.tax}}
+            </td>
         </tr>
 
         <tr style="font-weight: 800;">
@@ -298,30 +309,31 @@
                 </p>
 
             </td>
-            <td align="center">150 </td>
+            <td align="center"></td>
+            <td align="center">{{products.quantityTotal}}</td>
             <td></td>
-            <td align="center">SQM</td>
+            <td align="center"></td>
             <td align="center">{{products.gtotal}}</td>
         </tr>
 
         <tr>
-            <td colspan="6">
+            <td colspan="7">
                 <p align="left">
                     &nbsp;Amount Chargable( In Word)
                 </p>
                 <p>
-                    &nbsp;{{products.gtotalInword}} Only For,<span style="float:right">Darshan
+                    &nbsp;{{products.inwordPrefix}}{{products.gtotalInword}} Only For,<span style="float:right">Darshan
                         Safety Zone&nbsp;&nbsp;&nbsp;</span>
-
                 </p>
                 <p align="left">
-                    &nbsp;VAT TIN NO: 24075300574
+                    &nbsp;MSME No: &nbsp;UDYAM-GJ-01-0036584
                 </p>
                 <p align="left">
-                    &nbsp;CST NO: 24575300574 <span style="float:right">Authorised Signatory&nbsp;&nbsp;&nbsp;</span>
+                    &nbsp;TAN No: &nbsp;&nbsp;&nbsp;&nbsp; AHMH09140F
+                    <span style="float:right">Authorised Signatory&nbsp;&nbsp;&nbsp;</span>
                 </p>
                 <p align="left">
-                    &nbsp;P.A.NO AKQPP5799M
+                    &nbsp;PAN No:&nbsp;&nbsp;&nbsp;&nbsp; AKQPP5799M
                 </p>
 
             </td>
@@ -331,7 +343,7 @@
         <!-- {{#ifCond products.IsTAC '!==' 0 }} -->
 
         <tr>
-            <td colspan="6">
+            <td colspan="7">
                 <p>
                     Additional Terms & Conditions
                 </p>
@@ -376,7 +388,7 @@
         </tr> -->
 
         <tr>
-            <td colspan="6">
+            <td colspan="7">
                 <p align="center" style="padding: 2px 0px;">
                     For Indian Buyers: For Export purpose, We can Sale the Material under LUT, It will contain 0.01%
                     Tax.
@@ -385,7 +397,7 @@
         </tr>
 
         <tr>
-            <td colspan="6">
+            <td colspan="7">
 
                 <div style="display:-webkit-flex; width: 75%; margin: 5px auto; padding: 7px 0px;">
 
