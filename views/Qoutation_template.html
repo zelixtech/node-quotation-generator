@@ -112,7 +112,7 @@
 
                 <td>
                     <h6 style="padding-top:4px">Dated</h6>
-                    <b style="padding-top:6px">{{products.date}}</b>
+                    <b style="padding-top:6px">{{products.metadata.date}}</b>
                 </td>
             </tr>
 
@@ -131,7 +131,7 @@
             <tr height="50px">
                 <td>
                     <h6 style="padding-top:4px">Suppliers's Ref. No.</h6>
-                    <b style="padding-top:6px">{{products.supRefNo}}</b>
+                    <b style="padding-top:6px">{{products.metadata.suppliers_ref_no}}</b>
                 </td>
 
                 <td>
@@ -221,10 +221,6 @@
             <td>
                 <p class="red" style="padding-bottom: 1px;">{{this.description}} {{this.modelNo}}</p>
 
-                {{#ifCond this.size '!==' '' }}
-                <p style="font-weight:500;">size: {{this.size}}</p>
-                {{/ifCond}}
-
                 {{#each this.data}}
                 <p style="font-weight:500;">{{this}}</p>
                 {{/each}}
@@ -245,6 +241,9 @@
 
         {{#ifCond products.IsRP '!==' 0 }}
 
+
+
+        {{#each products.rprodlist}}
         <tr>
             <td colspan="7">
                 <p align="center" style="padding: 2px 0px; color: #c00000;">
@@ -252,24 +251,25 @@
                 </p>
             </td>
         </tr>
-
-        {{#each products.rprodlist}}
         <tr style="font-weight: 700;">
-            <td width="30px">{{this.id}}</td>
-            <td width="552px">
-                <p class="red" style="padding-bottom: 1px;">{{this.description}}</p>
+            <td style="text-align: center;">{{this.id}}</td>
+            <td>
+                <p class="red" style="padding-bottom: 1px;">{{this.description}} {{this.modelNo}}</p>
 
-                <p>Model No: {{this.data.ModelNo}}</p>
-                <p>Working Temp: {{this.data.WorkingTempRange}}</p>
-                <p>Melting Point: {{this.data.MeltingPoint}}</p>
-                <p>Thikness: {{this.thikness}}</p>
-                <p>Color: {{this.data.Color}}</p>
+                {{#each this.data}}
+                <p style="font-weight:500;">{{this}}</p>
+                {{/each}}
+
+                {{#each this.note}}
+                <p style="font-weight:500;">{{this}}</p>
+                {{/each}}
 
             </td>
-            <td style="text-align: center;">{{this.quantity}}</td>
-            <td style="text-align: center;">{{this.rate}}</td>
-            <td style="text-align: center;">{{this.unit}}</td>
-            <td style="text-align: center;">{{this.subtotal}}</td>
+            <td style="text-align: center; font-weight:500;">{{this.HSNCode}}</td>
+            <td style="text-align: center; font-weight:500;">{{this.quantity}}</td>
+            <td style="text-align: center; font-weight:500;">{{this.rate}}</td>
+            <td style="text-align: center; font-weight:500;">{{this.unit}}</td>
+            <td style="text-align: center; font-weight:500;">{{this.subtotal}}</td>
         </tr>
         {{/each}}
 
@@ -278,9 +278,25 @@
         <tr style="color: #c00000; font-weight: 800;">
             <td colspan="2">
                 <p align="right">
+
+                    {{#ifCond products.metadata.currency '===' "INR"}}
                     Transportation Cost&nbsp; <br>
                     Packaging And Forwarding Charges&nbsp; <br>
                     Output IGST {{products.metadata.GST}}%&nbsp; <br>
+                    {{/ifCond}}
+
+                    {{#ifCond products.metadata.currency '===' "USD"}}
+
+                    Packaging And Forwarding Charges&nbsp; <br>
+
+                    {{#ifCond products.metadata.custom_field1_value "!==" ""}}
+                    {{products.metadata.custom_field1}}&nbsp; <br>
+                    {{/ifCond}}
+                    {{#ifCond products.metadata.custom_field2_value "!==" ""}}
+                    {{products.metadata.custom_field2}}&nbsp; <br>
+                    {{/ifCond}}
+                    Output IGST {{products.metadata.GST}}%&nbsp; <br>
+                    {{/ifCond}}
                 </p>
                 <p align="left">
                     &nbsp; Transportation : {{products.metadata.transportation}}<br>
@@ -290,15 +306,48 @@
             <td colspan="1"></td>
             <td colspan="1"></td>
             <td style="text-align: center; vertical-align: top;">
+
+                {{#ifCond products.metadata.currency '===' "INR"}}
                 <br>
                 <br>
                 {{products.metadata.GST}}%
+                {{/ifCond}}
+
+
+                {{#ifCond products.metadata.currency '===' "USD"}}
+                <br>
+                {{#ifCond products.metadata.custom_field1_value "!==" ""}}
+                <br>
+                {{/ifCond}}
+                {{#ifCond products.metadata.custom_field2_value "!==" ""}}
+                <br>
+                {{/ifCond}}
+                {{products.metadata.GST}}%
+                {{/ifCond}}
             </td>
             <td colspan="1"></td>
             <td style="text-align: center; vertical-align: top;">
+
+                {{#ifCond products.metadata.currency '===' "INR"}}
                 {{products.transportation_cost}}<br />
                 {{products.packaging_and_forwarding_charges}}<br />
                 {{products.tax}}
+                {{/ifCond}}
+
+                {{#ifCond products.metadata.currency '===' "USD"}}
+
+                {{products.packaging_and_forwarding_charges}}<br />
+
+                {{#ifCond products.metadata.custom_field1_value "!==" ""}}
+                {{products.custom_field1_cost}}&nbsp; <br>
+                {{/ifCond}}
+                {{#ifCond products.metadata.custom_field2_value "!==" ""}}
+                {{products.custom_field2_cost}}&nbsp; <br>
+                {{/ifCond}}
+
+                {{products.tax}}
+
+                {{/ifCond}}
             </td>
         </tr>
 
@@ -340,7 +389,7 @@
         </tr>
 
 
-        <!-- {{#ifCond products.IsTAC '!==' 0 }} -->
+        {{#ifCond products.IsTAC '!==' 0 }}
 
         <tr>
             <td colspan="7">
@@ -357,7 +406,7 @@
             </td>
         </tr>
 
-        <!-- {{/ifCond}} -->
+        {{/ifCond}}
 
         <!-- <tr>
             <td colspan="6">
