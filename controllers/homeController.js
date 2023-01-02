@@ -4,6 +4,7 @@ const path = require('path');
 // const options = require('../helpers/options');
 // const data = require('../helpers/data');
 var converter = require('number-to-words');
+const axios = require('axios');
 
 
 const homeview = (req, res, next) => {
@@ -12,17 +13,61 @@ const homeview = (req, res, next) => {
 
 let count = 000001;
 
-const generatePdf = async (req, res, next) => {
+const generatePdf = async (req, res) => {
 
     try {
 
         const data = req.body
+        var error = undefined;
+        var QuotationNo = "";
 
-        console.log(req.body)
+
+        var reqdata = JSON.stringify({
+            "data": {
+                "quotation_data": [{ ...data }],
+            }
+        });
+
+        var config = {
+            method: 'post',
+            url: `http://localhost:5000/api/quotation/${data.query_id}`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': 'darshanSession=s%3A1pHuUrUxP4VvI_q9PGtz-E7QGHQYB0bC.zID6MNIzgEpXQ8LL%2FylJsR8NfLPG8OSl6NzjnCatxDE'
+            },
+            data: reqdata
+        };
+
+        await axios(config)
+            .then(function (response) {
+                // console.log(JSON.stringify(response.data));
+
+                var resData = response.data;
+
+                if (resData.error) {
+                    error = resData.errorMessage;
+                } else {
+                    // console.log(resData.generatedQuotationNumber)
+                    if (resData.generatedQuotationNumber) {
+                        QuotationNo = resData.generatedQuotationNumber;
+                    } else {
+                        error = "Quotation number not found!"
+                    }
+                }
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        // console.log(QuotationNo);
+
+
+
 
         const html = fs.readFileSync(path.join(__dirname, '../views/Qoutation_template.html'), 'utf-8');
 
-        const filename = "DSZ" + count + '.pdf';
+        const filename = QuotationNo.split("/")[0] + "-" + QuotationNo.split("/")[1] + '.pdf';
 
         count++;
 
@@ -55,7 +100,7 @@ const generatePdf = async (req, res, next) => {
             }
 
             // var size = "";
-            var unit_cost;
+            var unit_cost = 1;
 
             if (d.length === "NA" && d.width === "NA") {
                 // size = ``;
@@ -71,6 +116,7 @@ const generatePdf = async (req, res, next) => {
                 unit_cost = d.width * d.length
             }
 
+            // console.log("unit cost:" + unit_cost);
 
             // if (d.length === "NA" && d.width === "NA") {
             //     size = ``;
@@ -136,6 +182,8 @@ const generatePdf = async (req, res, next) => {
                 })
             }
 
+            var unit_cost = 1;
+
             if (d.length === "NA" && d.width === "NA") {
                 unit_cost = 1;
             } else if (d.length === "NA") {
@@ -189,8 +237,9 @@ const generatePdf = async (req, res, next) => {
         let subtotal = 0;
         let quantityTotal = 0;
         product_array.forEach(i => {
+            // console.log(i.total);
             subtotal += i.total;
-            quantityTotal += parseFloat(i.quantity);
+            quantityTotal += parseInt(i.quantity);
         });
 
 
@@ -200,7 +249,7 @@ const generatePdf = async (req, res, next) => {
         let custom_field2_cost = details.metadata.custom_field2_value;
 
 
-        if (!isNaN(transportation_cost)) {
+        if (!isNaN(transportation_cost) && transportation_cost !== "To Pay" && transportation_cost !== "") {
             subtotal += parseFloat(transportation_cost);
             transportation_cost = parseFloat(transportation_cost);
             transportation_cost = transportation_cost.toLocaleString('en-IN', {
@@ -238,6 +287,8 @@ const generatePdf = async (req, res, next) => {
             });
         }
 
+        // console.log(subtotal);
+
         let tax = (subtotal * details.metadata.GST) / 100;
         let grandtotal = subtotal + tax;
 
@@ -250,7 +301,8 @@ const generatePdf = async (req, res, next) => {
         }
 
         // const inword = ""
-        var inword = converter.toWords(grandtotal);
+        // console.log(grandtotal);
+        var inword = converter.toWords(parseFloat(grandtotal));
         inword = toTitleCase(inword);
 
         grandtotal = grandtotal.toLocaleString('en-IN', {
@@ -275,6 +327,7 @@ const generatePdf = async (req, res, next) => {
             prodlist: product_array,
             rprodlist: recommend_array,
             subtotal: subtotal,
+            quotationNo: QuotationNo,
             quantityTotal: quantityTotal,
             tax: tax,
             gtotal: grandtotal,
