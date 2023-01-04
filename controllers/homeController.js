@@ -22,43 +22,51 @@ const generatePdf = async (req, res) => {
         var QuotationNo = "";
 
 
-        var reqdata = JSON.stringify({
-            "data": {
-                "quotation_data": [{ ...data }],
-            }
-        });
+        console.log(data);
 
-        var config = {
-            method: 'post',
-            url: `http://localhost:5000/api/quotation/${data.query_id}`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': 'darshanSession=s%3A1pHuUrUxP4VvI_q9PGtz-E7QGHQYB0bC.zID6MNIzgEpXQ8LL%2FylJsR8NfLPG8OSl6NzjnCatxDE'
-            },
-            data: reqdata
-        };
-
-        await axios(config)
-            .then(function (response) {
-                // console.log(JSON.stringify(response.data));
-
-                var resData = response.data;
-
-                if (resData.error) {
-                    error = resData.errorMessage;
-                } else {
-                    // console.log(resData.generatedQuotationNumber)
-                    if (resData.generatedQuotationNumber) {
-                        QuotationNo = resData.generatedQuotationNumber;
-                    } else {
-                        error = "Quotation number not found!"
-                    }
+        if (data.quotation === "new") {
+            var reqdata = JSON.stringify({
+                "data": {
+                    "quotation_data": [{ ...data }],
                 }
-
-            })
-            .catch(function (error) {
-                console.log(error);
             });
+
+            var config = {
+                method: 'post',
+                url: `http://localhost:5000/api/quotation/${data.query_id}`,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': 'darshanSession=s%3A1pHuUrUxP4VvI_q9PGtz-E7QGHQYB0bC.zID6MNIzgEpXQ8LL%2FylJsR8NfLPG8OSl6NzjnCatxDE'
+                },
+                data: reqdata
+            };
+
+            await axios(config)
+                .then(function (response) {
+                    // console.log(JSON.stringify(response.data));
+
+                    var resData = response.data;
+
+                    if (resData.error) {
+                        error = resData.errorMessage;
+                    } else {
+                        // console.log(resData.generatedQuotationNumber)
+                        if (resData.generatedQuotationNumber) {
+                            QuotationNo = resData.generatedQuotationNumber;
+                        } else {
+                            error = "Quotation number not found!"
+                        }
+                    }
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+        } else {
+            QuotationNo = data.generatedQuotationNumber;
+        }
+
 
         // console.log(QuotationNo);
 
