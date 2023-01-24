@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', homeview);
 // router.get('/download', generatePdf);
-router.post('/download', generatePdf);
+router.post('/generate/download', generatePdf);
 
 module.exports = {
     routes: router

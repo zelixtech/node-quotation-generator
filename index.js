@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/docs', express.static(path.join(__dirname, 'docs')));
+app.use('/generate', (req,res) => res.send('hello from node quotation generetor server'));
 app.use(homeRoutes.routes);
 
 
