@@ -5,6 +5,8 @@ const path = require("path");
 // const data = require('../helpers/data');
 var converter = require("number-to-words");
 const axios = require("axios");
+// const { createInvoice } = require("./invoice");
+// const { createQuotation } = require("./quotation");
 
 const homeview = (req, res, next) => {
 	res.render("home");
@@ -16,51 +18,51 @@ const generatePdf = async (req, res) => {
 	try {
 		const data = req.body;
 		var error = undefined;
-		var QuotationNo = "";
+		var QuotationNo = req.body.generatedQuotationNumber;
 
 		console.log(data);
 
-		if (data.quotation === "new") {
-			var reqdata = JSON.stringify({
-				data: {
-					quotation_data: [{ ...data }],
-				},
-			});
+		// if (data.quotation === "new") {
+		// 	var reqdata = JSON.stringify({
+		// 		data: {
+		// 			quotation_data: [{ ...data }],
+		// 		},
+		// 	});
 
-			var config = {
-				method: "post",
-				url: `${SERVER_URL}/api/quotation/${data.query_id}`,
-				headers: {
-					"Content-Type": "application/json",
-					Cookie:
-						"darshanSession=s%3A1pHuUrUxP4VvI_q9PGtz-E7QGHQYB0bC.zID6MNIzgEpXQ8LL%2FylJsR8NfLPG8OSl6NzjnCatxDE",
-				},
-				data: reqdata,
-			};
+		// 	var config = {
+		// 		method: "post",
+		// 		url: `${SERVER_URL}/api/quotation/${data.query_id}`,
+		// 		headers: {
+		// 			"Content-Type": "application/json",
+		// 			Cookie:
+		// 				"darshanSession=s%3A1pHuUrUxP4VvI_q9PGtz-E7QGHQYB0bC.zID6MNIzgEpXQ8LL%2FylJsR8NfLPG8OSl6NzjnCatxDE",
+		// 		},
+		// 		data: reqdata,
+		// 	};
 
-			await axios(config)
-				.then(function (response) {
-					// console.log(JSON.stringify(response.data));
+		// 	await axios(config)
+		// 		.then(function (response) {
+		// 			// console.log(JSON.stringify(response.data));
 
-					var resData = response.data;
+		// 			var resData = response.data;
 
-					if (resData.error) {
-						error = resData.errorMessage;
-					} else {
-						// console.log(resData.generatedQuotationNumber)
-						if (resData.generatedQuotationNumber) {
-							QuotationNo = resData.generatedQuotationNumber;
-						} else {
-							error = "Quotation number not found!";
-						}
-					}
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
-		} else {
-			QuotationNo = data.generatedQuotationNumber;
-		}
+		// 			if (resData.error) {
+		// 				error = resData.errorMessage;
+		// 			} else {
+		// 				// console.log(resData.generatedQuotationNumber)
+		// 				if (resData.generatedQuotationNumber) {
+		// 					QuotationNo = resData.generatedQuotationNumber;
+		// 				} else {
+		// 					error = "Quotation number not found!";
+		// 				}
+		// 			}
+		// 		})
+		// 		.catch(function (error) {
+		// 			console.log(error);
+		// 		});
+		// } else {
+		// 	QuotationNo = data.generatedQuotationNumber;
+		// }
 
 		// console.log(QuotationNo);
 
@@ -411,8 +413,8 @@ const generateInvoicePdf = async (req, res) => {
 		//   data
 		// );
 		var error = undefined;
-		var InvoiceNo = "";
-
+		var InvoiceNo = req.body.generatedInvoiceNumber;
+		/*
 		// if (data.quotation === "new") {
 		//   var reqdata = JSON.stringify({
 		//     data: {
@@ -455,7 +457,7 @@ const generateInvoicePdf = async (req, res) => {
 		// }
 
 		// console.log(InvoiceNo);
-
+*/
 		const html = fs.readFileSync(
 			path.join(__dirname, "../views/Invoice_template.html"),
 			"utf-8"

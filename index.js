@@ -4,7 +4,9 @@ const path = require("path");
 const homeRoutes = require("./routes/home-routes");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+require("dotenv").config();
 
+const { sequelize } = require("./db");
 const corsOptions = {
 	origin: "*",
 	credentials: true, //access-control-allow-credentials:true
