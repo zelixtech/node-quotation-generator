@@ -1,18 +1,17 @@
-const express = require('express');
+const express = require("express");
 const {
-    homeview,
-    generatePdf,
-    generateInvoicePdf,
+	homeview,
+	generatePdf,
+	generateInvoicePdf,
 } = require("../controllers/homeController");
-
 
 const router = express.Router();
 
-router.get('/', homeview);
+router.get("/", homeview);
 // router.get('/download', generatePdf);
-router.post('/download', generatePdf);
-router.post("/createInvoice", generateInvoicePdf);
+router.post("/generate/download", generatePdf);
+router.post("/generate/createInvoice", generateInvoicePdf);
 
 module.exports = {
-    routes: router
-}
+	routes: router,
+};
