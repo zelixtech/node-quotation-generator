@@ -34,6 +34,8 @@ function initModels(sequelize) {
 	return {
 		client,
 		query,
+		invoice,
+		quotation
 	};
 }
 

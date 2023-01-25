@@ -70,7 +70,7 @@ const createInvoice = async (req, res, next) => {
 		const generatedInvoiceNumber = buildInvoiceNumber(
 			invoice.invoice_number,
 			invoice.invoice_financial_year,
-			req.body.data.invoice_data[0].sender.name.charAt(0)
+			req.body.data.invoice_data.sender.name.charAt(0)
 		);
 		req.body.generatedInvoiceNumber = generatedInvoiceNumber;
 		next();

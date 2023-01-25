@@ -81,10 +81,11 @@ const createQuotation = async (req, res, next) => {
 				quotation.quotation_number,
 				quotation.quotation_count_no,
 				quotation.quotation_financial_year,
-				req.body.data.quotation_data[0].sender.name.charAt(0)
+				req.body.data.quotation_data.sender.name.charAt(0)
 			);
 
 			req.body.generatedQuotationNumber = generatedQuotationNumber;
+			console.log(req.body.generatedQuotationNumber);
 			next();
 			// return res.status(200).json({
 			// 	error: false,
@@ -126,9 +127,11 @@ const createQuotation = async (req, res, next) => {
 			quotation.quotation_number,
 			quotation.quotation_count_no,
 			quotation.quotation_financial_year,
-			req.body.data.quotation_data[0].sender.name.charAt(0)
+			req.body.data.quotation_data.sender.name.charAt(0)
 		);
+		console.log(generatedQuotationNumber)
 		req.body.generatedQuotationNumber = generatedQuotationNumber;
+		console.log(req.body.generatedQuotationNumber);
 		next();
 
 		// return res.status(200).json({
