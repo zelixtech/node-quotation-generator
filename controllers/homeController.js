@@ -360,6 +360,9 @@ const generatePdf = async (req, res) => {
 			format: "A3",
 			orientation: "portrait",
 			border: "10mm",
+			childProcessOptions: {
+				env: {OPENSSL_CONF: '/dev/null'}
+			},
 		};
 
 		var document = {
