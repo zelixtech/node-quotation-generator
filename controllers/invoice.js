@@ -26,12 +26,13 @@ function buildInvoiceNumber(
 
 const createInvoice = async (req, res, next) => {
 	try {
+		console.log("req received");
 		if (!req.body.data) {
 			throw new Error("ValidationError");
 		}
 
 		const payload = {
-			client_id: req.params.client_id,
+			client_id: req.body.data.client_id,
 			invoice_data: JSON.stringify(req.body.data.invoice_data),
 		};
 

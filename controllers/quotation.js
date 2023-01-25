@@ -27,6 +27,7 @@ function buildQuotationNumber(
 
 const createQuotation = async (req, res, next) => {
 	try {
+		console.log("received req");
 		if (!req.body.data) {
 			throw new Error("ValidationError");
 		}
@@ -34,7 +35,7 @@ const createQuotation = async (req, res, next) => {
 			next();
 		}
 		const payload = {
-			query_id: req.params.query_id,
+			query_id: req.body.data.query_id,
 			quotation_data: JSON.stringify(req.body.data.quotation_data),
 		};
 

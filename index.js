@@ -21,9 +21,9 @@ app.use(cors(corsOptions));
 app.use(expressLayouts);
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
-app.use("/generate", (req, res) =>
+/*app.use("/generate", (req, res) =>
 	res.send("hello from node quotation generetor server")
-);
+);*/
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
 	"/generate/docs",
