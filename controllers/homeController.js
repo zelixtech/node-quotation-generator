@@ -357,7 +357,7 @@ const generatePdf = async (req, res) => {
 		};
 
 		var options = {
-			format: "A3",
+			format: "A4",
 			orientation: "portrait",
 			border: "10mm",
 			childProcessOptions: {
@@ -864,7 +864,7 @@ const generateInvoicePdf = async (req, res) => {
 		};
 
 		var options = {
-			format: "A3",
+			format: "A4",
 			orientation: "portrait",
 			border: "10mm",
 		};
