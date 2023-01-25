@@ -13,16 +13,15 @@ const homeview = (req, res, next) => {
 };
 
 let count = 000001;
-require('dotenv').config();
+require("dotenv").config();
 const SERVER_URL = process.env.SERVER_URL;
 const generatePdf = async (req, res) => {
 	try {
 		const data = req.body.data.quotation_data;
 		var error = undefined;
 		var QuotationNo = req.body.generatedQuotationNumber;
-
-//		console.log(data);
-console.log(req.body)
+		//		console.log(data);
+		console.log(req.body);
 		// if (data.quotation === "new") {
 		// 	var reqdata = JSON.stringify({
 		// 		data: {
@@ -72,11 +71,7 @@ console.log(req.body)
 			"utf-8"
 		);
 
-		const filename =
-			QuotationNo.split("/")[0] +
-			"-" +
-			QuotationNo.split("/")[1] +
-			".pdf";
+		const filename = `${QuotationNo}.pdf`;
 
 		count++;
 
@@ -463,11 +458,7 @@ const generateInvoicePdf = async (req, res) => {
 			path.join(__dirname, "../views/Invoice_template.html"),
 			"utf-8"
 		);
-		const filename =
-			InvoiceNo.split("/")[0] +
-			"-" +
-			InvoiceNo.split("/")[1] +
-			".pdf";
+		const filename = `${InvoiceNo}.pdf`;
 
 		count++;
 

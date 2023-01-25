@@ -31,7 +31,7 @@ const createQuotation = async (req, res, next) => {
 		if (!req.body.data) {
 			throw new Error("ValidationError");
 		}
-		if (req.body.quotation !== "new") {
+		if (req.body.data.quotation_data.quotation !== "new") {
 			next();
 		}
 		const payload = {
@@ -129,7 +129,7 @@ const createQuotation = async (req, res, next) => {
 			quotation.quotation_financial_year,
 			req.body.data.quotation_data.sender.name.charAt(0)
 		);
-		console.log(generatedQuotationNumber)
+		console.log(generatedQuotationNumber);
 		req.body.generatedQuotationNumber = generatedQuotationNumber;
 		console.log(req.body.generatedQuotationNumber);
 		next();
