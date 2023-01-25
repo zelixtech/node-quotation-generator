@@ -16,6 +16,7 @@ let count = 000001;
 const generatePdf = async (req, res) => {
 
     try {
+console.log('req received')
 
         const data = req.body
         var error = undefined;
@@ -27,13 +28,14 @@ const generatePdf = async (req, res) => {
         if (data.quotation === "new") {
             var reqdata = JSON.stringify({
                 "data": {
+		    "isLocalhost": true,
                     "quotation_data": [{ ...data }],
                 }
             });
 
             var config = {
                 method: 'post',
-                url: `http://localhost:5000/api/quotation/${data.query_id}`,
+                url: `https://api.darshansafety.in/api/quotation/${data.query_id}`,
                 headers: {
                     'Content-Type': 'application/json',
                     'Cookie': 'darshanSession=s%3A1pHuUrUxP4VvI_q9PGtz-E7QGHQYB0bC.zID6MNIzgEpXQ8LL%2FylJsR8NfLPG8OSl6NzjnCatxDE'
@@ -43,7 +45,7 @@ const generatePdf = async (req, res) => {
 
             await axios(config)
                 .then(function (response) {
-                    // console.log(JSON.stringify(response.data));
+                    console.log(JSON.stringify(response.data));
 
                     var resData = response.data;
 
@@ -377,7 +379,7 @@ const generatePdf = async (req, res) => {
                 console.error(error);
             });
 
-        const filepath = 'http://localhost:8000/docs/' + filename;
+        const filepath = 'https://api.darshansafety.in/generate/docs/' + filename;
 
 
 
