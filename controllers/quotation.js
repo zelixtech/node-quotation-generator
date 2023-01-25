@@ -22,7 +22,7 @@ function buildQuotationNumber(
 	empFirstLetter = "U"
 ) {
 	empFirstLetter = empFirstLetter.toUpperCase();
-	return `DSZ${quotation_number}${empFirstLetter}(${quotation_count_no})/20${quotation_financial_year}`;
+	return `DSZ${quotation_number}${empFirstLetter}(${quotation_count_no})-20${quotation_financial_year}`;
 }
 
 const createQuotation = async (req, res, next) => {

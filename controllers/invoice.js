@@ -21,7 +21,7 @@ function buildInvoiceNumber(
 	empFirstLetter = "U"
 ) {
 	empFirstLetter = empFirstLetter.toUpperCase();
-	return `DSZ${invoice_number}${empFirstLetter}/20${invoice_financial_year}`;
+	return `DSZ${invoice_number}${empFirstLetter}-20${invoice_financial_year}`;
 }
 
 const createInvoice = async (req, res, next) => {
